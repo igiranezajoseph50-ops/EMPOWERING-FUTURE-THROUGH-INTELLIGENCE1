@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LEGACIA — Beyond Intelligence</title>
+
+    
+
+    <style>
+        :root {
+            --primary: #00f0ff;
+            --primary-dark: #00b4cc;
+            --accent: #ff00aa;
+            --dark: #0a0015;
+            --dark-2: #140028;
+            --light: #f0f8ff;
+            --glass: rgba(20, 20, 60, 0.28);
+            --glow: 0 0 35px rgba(0, 240, 255, 0.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(ellipse at 35% 20%, #1a0033 0%, #000814 40%, #000000 100%);
+            color: white;
+            font-family: 'Roboto', system-ui, sans-serif;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: transparent;
+            z-index: -2;
+        }
+
+       
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(5, 0, 20, 0.65);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.12);
+            z-index: 1000;
+            padding: 0 5vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: var(--glow);
+            transition: all 0.6s ease;
+        }
+        .logo:hover{
+          transform: rotate(360deg) scale(1.05);
+        }
+
+        .brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), #a5f8ff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav a {
+            color: #e0f0ff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.4s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.4s ease;
+        }
+
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--primary); }
+
+        .login-btn {
+            padding: 10px 28px;
+            border-radius: 50px;
+            background: linear-gradient(45deg, var(--accent), #ff4db8);
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255,0,170,0.4);
+            transition: all 0.35s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 35px rgba(255,0,170,0.65);
+        }
+
+       
+        .hero {
+            min-height: 60vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 8vw;
+            gap: 6vw;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3.8rem, 8vw, 7.2rem);
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff, var(--primary), #a5f8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--accent), #ff4db8, #ff80cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #c0d8ff;
+            max-width: 540px;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-outline {
+            padding: 16px 42px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), #00c0e0);
+            color: black;
+            border: none;
+            box-shadow: var(--glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover,
+        .btn-outline:hover {
+            transform: translateY(-6px);
+        }
+
+        .btn-primary:hover { box-shadow: 0 0 50px rgba(0,240,255,0.7); }
+        .btn-outline:hover { background: rgba(0,240,255,0.12); }
+
+        .hero-image-container {
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 780px;
+            border-radius: 24px;
+            transform: rotateY(12deg) rotateX(8deg);
+            box-shadow: 
+                0 40px 120px rgba(0,0,0,0.7),
+                0 0 80px rgba(0,240,255,0.35);
+            transition: transform 1.2s ease;
+        }
+
+        .hero-image-container:hover .hero-image {
+            transform: rotateY(4deg) rotateX(3deg) scale(1.03);
+        }
+
+      
+        .services-section {
+            padding: 18vh 8vw 12vh;
+            position: relative;
+        }
+
+        .services-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3.5rem, 7vw, 6rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, #fff, var(--primary), #a5f8ff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2.5rem;
+            max-width: 1600px;
+            margin: 6rem auto 0;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, rgba(30,20,60,0.45), rgba(10,5,40,0.35));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0,240,255,0.18);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-18px);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5),
+                        0 0 60px rgba(0,240,255,0.35);
+            border-color: var(--primary);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.12);
+        }
+
+        .card-content {
+            padding: 2.2rem;
+        }
+
+        .card-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+       
+        footer {
+            background: #050014;
+            border-top: 1px solid rgba(0,240,255,0.12);
+            padding: 8rem 8vw 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1.6rem;
+            font-size: 1.4rem;
+        }
+
+        footer ul {
+            list-style: none;
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        footer a, footer li {
+            color: #b0c8ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer li:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #777;
+        }
+       .container1 {
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+      position: relative;
+      background-color: transparent;
+      margin-top: 100px;
+      
+
+    }
+
+    .countries {
+      display: inline-block;
+      height: 40px;
+      white-space: nowrap;
+      font-size: 22px;
+      animation: moveLeft 50s linear infinite;
+      
+
+    }
+    .country {
+      
+       width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: var(--glow);
+            margin-top: 15px;
+            margin-left: 30px;
+      transition: transform 0.2s ease;
+    }
+    .country:hover {
+     transform: translateY(-5px) rotate(360deg) scale(1.30);
+     border-radius: 60px;
+    }
+
+
+    @keyframes moveLeft {
+      0% {
+        transform: translateX(100vw);  
+      }
+      100% {
+        transform: translateX(-100%);   
+      }
+    }
+
+    </style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<header>
+    <div class="brand-container">
+        <img class="logo" src="legacia.jpg" alt="Legacia Logo">
+        <span class="brand">LEGACIA</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container1">
+    <div class="countries">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+    </div>
+</div>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Empowering Future<br>Through <span>Intelligence</span></h1>
+        <p>Next-generation AI solutions that redefine what's possible across industries — from agriculture to defense, from healing to exploration.</p>
+
+        <div class="cta-group">
+            <a href="services.html" class="btn-primary">Explore Universe →</a>
+            <a href="signup.html" class="btn-outline">Join the Evolution</a>
+        </div>
+    </div>
+
+    <div class="hero-image-container">
+        <img class="hero-image" src="cobot.jpg" alt="Advanced AI & Robotics">
+    </div>
+</section>
+
+<section class="services-section">
+    <h2 class="services-title">CORE DOMAINS</h2>
+
+    <div class="cards-grid">
+        <div class="service-card">
+            <img src="agri.jpg" alt="Agriculture">
+            <div class="card-content">
+                <h3>Agriculture</h3>
+                <p>Intelligent IoT ecosystems for precision farming, predictive yield, autonomous operations.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="weapon.avif" alt="Military">
+            <div class="card-content">
+                <h3>Defense & Military</h3>
+                <p>Secure AI, quantum-resistant encryption, next-gen autonomous defense systems.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="ai-trade.jpg" alt="Trade">
+            <div class="card-content">
+                <h3>Trade & Finance</h3>
+                <p>Ultra-fast AI trading engines • Blockchain • Sovereign data protection</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="ai-mining.webp" alt="Mining">
+            <div class="card-content">
+                <h3>Mining</h3>
+                <p>Autonomous robotic swarms • Real-time hazard prediction • Zero-human-risk extraction</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="education.jpg" alt="Education">
+            <div class="card-content">
+                <h3>Education</h3>
+                <p>Hyper-personalized learning • AI tutors • Next-gen academic data infrastructure</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="surgery.jpg" alt="Health">
+            <div class="card-content">
+                <h3>Healthcare</h3>
+                <p>AI-assisted precision surgery • Real-time diagnostics • Secure medical ecosystems</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container1">
+    <div class="countries">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h4 class="footer-title">Agriculture & Mining</h4>
+            <ul>
+                <li>Precision Irrigation</li>
+                <li>Autonomous Harvesting</li>
+                <li>Climate Intelligence</li>
+                <li>Zero-risk Mining</li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="footer-title">Defense</h4>
+            <ul>
+                <li>Autonomous Systems</li>
+                <li>Quantum Security</li>
+                <li>Satellite Command</li>
+                <li>Secure Comms</li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="footer-title">Trade & Finance</h4>
+            <ul>
+                <li>AI Trading Engines</li>
+                <li>Blockchain Infrastructure</li>
+                <li>Sovereign Data Vaults</li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="footer-title">Education</h4>
+            <ul>
+                <li>Hyper-personal Learning</li>
+                <li>AI Academic Ecosystem</li>
+                <li>Digital Knowledge Vault</li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="footer-title">Healthcare</h4>
+            <ul>
+                <li>AI Precision Surgery</li>
+                <li>Real-time Diagnostics</li>
+                <li>Medical Data Fortress</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 LEGACIA — Shaping Tomorrow's Reality • All Rights Reserved
+    </div>
+</footer>
+
+</body>
+</html>

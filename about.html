@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LEGACIA — About Us</title>
+
+  
+
+  <style>
+    :root {
+      --primary: #00f0ff;
+      --accent: #ff00aa;
+      --dark: #0a0015;
+      --glass: rgba(30, 20, 80, 0.32);
+      --glow: 0 0 35px rgba(0, 240, 255, 0.55);
+      --glow-accent: 0 0 45px rgba(255, 0, 170, 0.55);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: radial-gradient(ellipse at top left, #1a0033 0%, #000814 60%, #000000 100%);
+      color: #f0f8ff;
+      font-family: 'Roboto', system-ui, sans-serif;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 90px;
+      backdrop-filter: blur(20px);
+      background: rgba(5,0,20,0.75);
+      border-bottom: 1px solid rgba(0,240,255,0.18);
+      z-index: 1000;
+      padding: 0 6vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-container { display: flex; align-items: center; gap: 1.4rem; }
+
+    .logo {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: var(--glow);
+      transition: all 0.7s;
+    }
+
+    .logo:hover { transform: scale(1.2) rotate(360deg); }
+
+    .brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.9rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--primary), #a5f8ff, var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 5px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 4.2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    nav a {
+      color: #d8e8ff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.15rem;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -9px;
+      left: 0;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.4s ease;
+    }
+
+    nav a:hover::after { width: 100%; }
+    nav a:hover { color: var(--primary); }
+
+    .login-btn {
+      padding: 12px 36px;
+      border-radius: 50px;
+      background: linear-gradient(45deg, var(--accent), #ff4db8);
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--glow-accent);
+      transition: all 0.45s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-5px) scale(1.08);
+      box-shadow: 0 0 55px rgba(255,0,170,0.8);
+    }
+
+    main { padding-top: 20px; padding-bottom: 160px; }
+
+    .mission-section {
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto 160px;
+      padding: 0 5vw;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(4.2rem, 9vw, 7.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 2rem;
+      letter-spacing: -2px;
+    }
+
+    .mission-text {
+      font-size: 1.65rem;
+      line-height: 1.7;
+      color: #c0d8ff;
+      max-width: 980px;
+      margin: 0 auto 3rem;
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.8rem;
+      margin-top: 6rem;
+    }
+
+    .vision-card {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0,240,255,0.22);
+      border-radius: 22px;
+      padding: 2.8rem;
+      transition: all 0.5s;
+    }
+
+    .vision-card:hover {
+      transform: translateY(-14px);
+      border-color: var(--primary);
+      box-shadow: var(--glow);
+    }
+
+    .vision-card h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2.5rem;
+      margin: 6rem 0;
+      padding: 0 5vw;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.12);
+    }
+
+   
+    .timeline-section {
+      max-width: 1300px;
+      margin: 0 auto 180px;
+      padding: 0 5vw;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 4rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 5px;
+      background: linear-gradient(to bottom, transparent, var(--primary) 20%, var(--accent) 50%, var(--primary) 80%, transparent);
+      transform: translateX(-50%);
+      box-shadow: 0 0 50px rgba(0,240,255,0.6);
+    }
+
+    .milestone {
+      position: relative;
+      width: 47%;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0,240,255,0.25);
+      border-radius: 20px;
+      padding: 2.8rem;
+      margin: 5rem 0;
+      transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .milestone:hover {
+      transform: translateY(-20px);
+      border-color: var(--primary);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 70px rgba(0,240,255,0.5);
+    }
+
+    .milestone.left  { left: 0; text-align: right; }
+    .milestone.right { left: 53%; text-align: left; }
+
+    .milestone h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+
+    .milestone p {
+      font-size: 1.3rem;
+      color: #d0e0ff;
+    }
+
+    .milestone::before {
+      content: '';
+      position: absolute;
+      top: 2.8rem;
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border: 5px solid var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 30px var(--accent);
+    }
+
+    .milestone.left::before  { right: -42px; }
+    .milestone.right::before { left: -42px; }
+
+   
+    .leadership-section {
+      max-width: 1400px;
+      margin: 0 auto 180px;
+      padding: 0 5vw;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 3.5rem 3rem;
+      margin-top: 7rem;
+    }
+
+    .leader-card {
+      background: linear-gradient(145deg, rgba(40,30,80,0.55), rgba(15,10,50,0.45));
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(0,240,255,0.22);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.6s;
+    }
+
+    .leader-card:hover {
+      transform: translateY(-20px);
+      box-shadow: 0 50px 120px rgba(0,0,0,0.7),
+                  0 0 80px rgba(0,240,255,0.5);
+      border-color: var(--primary);
+    }
+
+    .leader-card img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.9s ease;
+    }
+
+    .leader-card:hover img { transform: scale(1.15); }
+
+    .card-info {
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .card-info h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .card-info p {
+      color: #b0c8ff;
+      font-size: 1.25rem;
+    }
+
+  
+    .cta-center {
+      text-align: center;
+      margin: 160px 0;
+    }
+
+    .contact-btn {
+      padding: 22px 80px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      border-radius: 80px;
+      background: linear-gradient(45deg, var(--primary), #00c0e0);
+      color: #000;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--glow);
+      transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 0 0 90px rgba(0,240,255,0.85);
+    }
+
+    footer {
+      background: #050014;
+      border-top: 1px solid rgba(0,240,255,0.15);
+      padding: 12rem 6vw 6rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 6rem;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .footer-title {
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+    }
+
+    footer ul {
+      list-style: none;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    footer li {
+      color: #b0c8ff;
+      transition: color 0.3s;
+    }
+
+    footer li:hover { color: var(--primary); }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 9rem;
+      padding-top: 5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #777;
+    }
+     .container1 {
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+      position: relative;
+      background-color: transparent;
+      margin-top: 100px;
+      
+
+    }
+
+    .countries {
+      display: inline-block;
+      height: 40px;
+      white-space: nowrap;
+      font-size: 22px;
+      animation: moveLeft 50s linear infinite;
+      
+
+    }
+    .country {
+      
+       width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: var(--glow);
+            margin-top: 15px;
+            margin-left: 30px;
+      transition: transform 0.2s ease;
+    }
+    .country:hover {
+     transform: translateY(-5px) rotate(360deg) scale(1.30);
+     border-radius: 60px;
+    }
+
+
+    @keyframes moveLeft {
+      0% {
+        transform: translateX(100vw);  
+      }
+      100% {
+        transform: translateX(-100%);   
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand-container">
+    <img class="logo" src="legacia.jpg" alt="Legacia Logo">
+    <span class="brand">LEGACIA</span>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a class="login-btn" href="login.html">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+<div class="container1">
+    <div class="countries">
+       <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+
+    </div>
+</div>
+
+
+<main>
+
+  <section class="mission-section">
+    <h1 class="section-title">OUR MISSION</h1>
+    <p class="mission-text">
+      To pioneer unbreakable, ultra-intelligent AI-powered ecosystems that secure nations, transform industries, 
+      heal lives, and shape a sovereign, human-first future — starting from Kigali, reaching the stars.
+    </p>
+
+    <div class="vision-grid">
+      <div class="vision-card">
+        <h2>Sovereign Intelligence</h2>
+        <p>Quantum-secure systems that protect data and decisions for nations and people.</p>
+      </div>
+      <div class="vision-card">
+        <h2>Radical Autonomy</h2>
+        <p>AI that eliminates risk while multiplying human potential exponentially.</p>
+      </div>
+      <div class="vision-card">
+        <h2>Human-Centric Evolution</h2>
+        <p>Technology that empowers humanity — never replaces it.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/futuristic-agricultural-robot-glowing-blue-lights-digital-display-navigating-field-crops-night-374099984.jpg" alt="Futuristic AI agriculture at night"></div>
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/smart-agriculture-drone-ai-technology-spraying-green-field-futuristic-agricultural-flies-over-vast-crop-golden-406814275.jpg" alt="AI drone over golden fields"></div>
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/swarm-drones-fly-over-night-city-futuristic-tech-concept-unmanned-aerial-vehicles-dark-sky-above-cityscape-bokeh-lights-384803040.jpg" alt="Cyberpunk drone swarm over city"></div>
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/ai-assisted-robotic-surgery-futuristic-operating-room-conceptual-image-where-android-surgeons-perform-complex-procedure-388679233.jpg" alt="AI robotic surgery in futuristic OR"></div>
+  </div>
+
+  <section class="timeline-section">
+    <h2 class="section-title">OUR JOURNEY</h2>
+    
+    <div class="timeline">
+      <div class="milestone left">
+        <h3>2020</h3>
+        <p>Genesis in Kigali — Legacia vision born to fuse African innovation with global frontier tech</p>
+      </div>
+
+      <div class="milestone right">
+        <h3>2021</h3>
+        <p>Breakthrough AI-IoT deployments: Precision agriculture & autonomous mining revolution begins</p>
+      </div>
+
+      <div class="milestone left">
+        <h3>2022</h3>
+        <p>Secure AI trade infrastructure launched — real-time intelligence meets blockchain sovereignty</p>
+      </div>
+
+      <div class="milestone right">
+        <h3>2023</h3>
+        <p>Education transformed — hyper-personalized AI learning reaches thousands across continents</p>
+      </div>
+
+      <div class="milestone left">
+        <h3>2024</h3>
+        <p>Medical frontier crossed — first AI-assisted precision surgeries with robotic ecosystems</p>
+      </div>
+
+      <div class="milestone right">
+        <h3>2025</h3>
+        <p>Defense sovereignty achieved — next-gen autonomous systems & quantum-secure military intelligence</p>
+      </div>
+
+      <div class="milestone left" style="margin-top:7rem">
+        <h3>2026 & Beyond</h3>
+        <p>Global constellation: Sovereign AI networks protecting humanity across every domain</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="leadership-section">
+    <h2 class="section-title">LEADERSHIP</h2>
+
+    <div class="cards-grid">
+      <div class="leader-card">
+        <img src="memeber3.png" alt="Joseph - CEO">
+        <div class="card-info">
+          <h3>Joseph</h3>
+          <p>Chief Executive Officer</p>
+        </div>
+      </div>
+
+      <div class="leader-card">
+        <img src="member2.png" alt="Susan - CTO">
+        <div class="card-info">
+          <h3>Susan</h3>
+          <p>Chief Technology Officer</p>
+        </div>
+      </div>
+
+      <div class="leader-card">
+        <img src="member1.png" alt="Pamela - COO">
+        <div class="card-info">
+          <h3>Pamela</h3>
+          <p>Chief Operating Officer</p>
+        </div>
+      </div>
+
+      <div class="leader-card">
+        <img src="member4.png" alt="Joshua - Ambassador">
+        <div class="card-info">
+          <h3>Joshua</h3>
+          <p>Global Ambassador & Visionary</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-center">
+    <button class="contact-btn">Join the Revolution → Contact Us</button>
+  </div>
+
+</main>
+
+<div class="container1">
+    <div class="countries">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+        <img class="country" src="legacia.jpg" alt="country">
+    </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4 class="footer-title">Agriculture & Mining</h4>
+      <ul>
+        <li>Precision Irrigation Systems</li>
+        <li>Autonomous Harvesting Swarms</li>
+        <li>Climate Prediction AI</li>
+        <li>Zero-Human-Risk Mining</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">Defense</h4>
+      <ul>
+        <li>Autonomous Tactical Systems</li>
+        <li>Quantum-Grade Security</li>
+        <li>Satellite Intelligence Command</li>
+        <li>Encrypted Battlefield Comms</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">Trade & Finance</h4>
+      <ul>
+        <li>Hyper-Fast AI Trading</li>
+        <li>Blockchain Sovereignty Layers</li>
+        <li>Zero-Trust Data Vaults</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">Education</h4>
+      <ul>
+        <li>AI-Personalized Learning</li>
+        <li>Next-Gen Academic Platforms</li>
+        <li>Global Knowledge Preservation</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer-title">Healthcare</h4>
+      <ul>
+        <li>Precision AI Surgery</li>
+        <li>Real-Time Diagnostic Intelligence</li>
+        <li>Medical Data Citadel</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © January 2026 LEGACIA — Architects of Tomorrow • All Rights Reserved
+  </div>
+</footer>
+
+</body>
+</html>
